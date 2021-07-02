@@ -1,0 +1,29 @@
+
+# -- --------------------------------------------------------------------------------------------------- -- #
+# -- MarketMaker-BackTest                                                                                -- #
+# -- --------------------------------------------------------------------------------------------------- -- #
+# -- Description: Code for a proof of concept of a market-maker backtest                                 -- #
+# -- Author: IFFranciscoME - if.francisco.me@gmail.com                                                   -- #
+# -- license: MIT License                                                                                -- #
+# -- Repository: https://github.com/IFFranciscoME/MarketMaker-BackTest                                   -- #
+# --------------------------------------------------------------------------------------------------------- #
+
+# Run the following in bash console:
+# $ pip instal -r requirements.txt
+
+# -- Data Handling
+pandas==1.1.4
+
+# -- Historical prices
+ccxt==1.52
+
+# -- Scientific 
+numpy==1.20
+
+# -- Visualizations
+seaborn==0.11.1
+plotly==4.14.3
+rich==10.3.0
+
+# -- Notebooks
+ipywidgets==7.6.3
