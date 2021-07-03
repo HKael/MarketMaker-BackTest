@@ -12,6 +12,7 @@
 import pandas as pd
 import numpy as np
 import time
+import json
 
 # -- Cryptocurrency data and trading API
 import ccxt
@@ -167,7 +168,7 @@ def order_book(symbol, exchanges, execution='async', stop=None, output=None, ver
         time_f = 0
 
         # Loop until stop criteria is reached
-        while time_f <= 60:
+        while time_f <= 10:
             
             # Try and await for client response
             try:
@@ -217,5 +218,21 @@ def order_book(symbol, exchanges, execution='async', stop=None, output=None, ver
     else:
         raise ValueError(execution, 'is not supported as a type of execution')
 
-    # Return final data
-    return r_data
+    # ----------------------------------------------------------------------------------- Type of output -- #
+
+    # A JSON file writen in directory
+    if output == 'JSON':
+        # Serializing json 
+        json_object = pd.DataFrame(r_data).to_json()
+        
+        # Writing to sample.json
+        with open("orderbooks.json", "w") as outfile:
+            outfile.write(json_object)
+
+    # Just return the DataFrame
+    elif output == 'inplace':
+        return r_data
+    
+    # Invalid output
+    else:
+        raise ValueError('Invalid output value')

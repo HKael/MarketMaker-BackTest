@@ -17,8 +17,12 @@ symbol = 'BTC/EUR'
 expected_volume = 0
 
 # Get fee schedule
-fees = fees_schedule(exchange='kraken', symbol=symbol, expected_volume=5)
+# fees = fees_schedule(exchange='kraken', symbol=symbol, expected_volume=5)
 
 # Massive download of OrderBook data
-data = order_book(symbol=symbol, exchanges=exchanges, stop=None, verbose=True)
-data['bitfinex'][list(data['bitfinex'].keys())[0]].head()
+data = order_book(symbol=symbol, exchanges=exchanges, output='inplace', stop=None, verbose=True)
+bitfinex_dates = list(data['bitfinex'].keys())
+kraken_dates = list(data['kraken'].keys())
+
+data['kraken'][kraken_dates[0]]
+data['bitfinex'][bitfinex_dates[0]]
