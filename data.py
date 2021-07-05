@@ -236,3 +236,26 @@ def order_book(symbol, exchanges, execution='async', stop=None, output=None, ver
     # Invalid output
     else:
         raise ValueError('Invalid output value')
+
+# ---------------------------------------------------------------------------- CONTINUOUS ORDERBOOK DATA -- # 
+# --------------------------------------------------------------------------------------------------------- #
+
+def continuous_ob(orderbooks):
+    """
+    Creates a continuous orderbook timeseries data, for all orderbooks included as input. i.e. all timestamps that one orderbook has and the other dont, in the latter repeates the information of the former, with this, the output will deliver two historical orderbooks with the same timestamp.
+
+    Parameters
+    ----------
+    orderbooks: dict
+        With 2 or more orderbooks data. 
+
+    Returns
+    -------
+    r_ts_orderbooks: dict
+        With the 2 or more orderbooks now all of them with the same timestamps
+
+    """
+
+    r_ts_orderbooks = 1
+    
+    return r_ts_orderbooks
