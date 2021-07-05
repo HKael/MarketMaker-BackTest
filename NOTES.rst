@@ -3,43 +3,6 @@
 NOTES & CALCULATIONS
 ====================
 
-# -- Arbitrage version (Less cost efficient) -------------------------------------------------------------- # 
-# --------------------------------------------------------------------------------------------------------- # 
-
-On Origin, Take an existing ASK to BUY 1 BTC, on Destination, take an existing BID to SELL 1 BTC
-
-Buy : Take 1 BTC @6000 ASK on Bitfinex
-Sell: Take 1 BTC @ BID on Kraken
-
-# Bitfinex (Taker to the ASK)
-taker_price_ask * (1 - taker_fee) = 6000.000 * (1 - 0.0020) = 5988.00
-# Kraken (Taker from the BID)
-taker_price_bid * (1 - taker_fee) = taker_price_bid * (1 - 0.0026)
-
-# Formula
-5988.00 - taker_price_bid * (1 - 0.0026) = 0
-taker_price_bid = + 5988.00 / (1 - 0.0026)
-
-taker_price_bid = 6003.609384399
-spread = 6021.63 - 6003.609384399 = 18.0206 Eur or 29.92 Bp from ASK in Kraken
-
-# -- Bitfinex
-ASK = 6000.00 EUR
-BID = 5964.00 EUR
-Spread = 6000.00 - 5964.00 = 36 EUR or 60 bp
-
-# -- Kraken
-ASK = 6021.63 EUR
-BID = 6003.6094 EUR
-Spread = 6021.63 EUR - 6003.6094 EUR = 18.0206 EUR or 29.9264 bp
-
-# -- Numerical Proof
-bf_taker_ask * (1 - taker_fee) = 6000.00 * (1 - 0.0020) = 5988.00
-kr_taker_bid * (1 - taker_fee) = 6003.6094 * (1 - 0.0026) = 5988.00001556
-
-# -- Market Making ---------------------------------------------------------------------------------------- # 
-# --------------------------------------------------------------------------------------------------------- # 
-
 On Destination, Make a BID to BUY 1 BTC @kr_maker_bid, On Origin, take an existing BID to SELL @5,964.00
 
 Make : BID @maker_bid to BUY 1 BTC on Kraken
