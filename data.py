@@ -168,7 +168,7 @@ def order_book(symbol, exchanges, execution='async', stop=None, output=None, ver
         time_f = 0
 
         # Loop until stop criteria is reached
-        while time_f <= 10:
+        while time_f <= 60:
             
             # Try and await for client response
             try:
