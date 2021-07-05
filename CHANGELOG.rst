@@ -4,6 +4,23 @@ CHANGELOG
 =========
 
 ----------
+05.07.2021
+----------
+
+Added
+-----
+
+- ``README.rst`` as a short readme file.
+- ``main.py`` Auxiliary codes for reading JSON
+- ``main.py`` A quick calculation of historical spread.
+
+Modified
+--------
+
+- ``NOTES.rst`` Compacted information and droped other general notes and ideas for the moment.
+
+
+----------
 02.07.2021
 ----------
 
