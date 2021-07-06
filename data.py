@@ -154,6 +154,9 @@ def order_book(symbol, exchanges, execution='async', stop=None, output=None, ver
     # ----------------------------------------------------------------------------- ASYNCRONOUS REQUESTS -- # 
     async def async_client(exchange, symbol):
 
+        # Await to be inside exchange limits of calls
+        # await asyncio.sleep(exchange.rateLimit / 1000)
+
         # Initialize client inside the function, later will be closed, since this is runned asyncronuously
         # more than 1 client could be created and later closed.
         client = getattr(ccxt_async, exchange)({'enableRateLimit': True})
@@ -176,17 +179,20 @@ def order_book(symbol, exchanges, execution='async', stop=None, output=None, ver
                 # Fetch, await and get datetime
                 orderbook = await client.fetch_order_book(symbol)
                 datetime = client.iso8601(client.milliseconds())
-                
+
                 # Verbosity
                 if verbose:
                     print(datetime, client.id, symbol, orderbook['bids'][0], orderbook['asks'][0])
 
+                # Unpack values
+                ask_price, ask_size = np.array(list(zip(*orderbook['asks']))[0:2])
+                bid_price, bid_size = np.array(list(zip(*orderbook['bids']))[0:2])
+                spread = np.round(ask_price - bid_price, 4)
+               
                 # Final data format for the results
-                r_data[client.id].update({datetime:
-                                        pd.DataFrame({'ask_size': [i[1] for i in orderbook['asks']],
-                                                    'ask': [i[0] for i in orderbook['asks']],
-                                                    'bid': [i[0] for i in orderbook['bids']],
-                                                    'bid_size': [i[1] for i in orderbook['bids']]})})
+                r_data[client.id].update({datetime: pd.DataFrame({'ask_size': ask_size, 'ask': ask_price,
+                                                                  'bid': bid_price, 'bid_size': bid_size,
+                                                                  'spread': spread}) })
                 # End time
                 time_2 = time.time()
                 time_f = round(time_2 - time_1, 4)
@@ -226,7 +232,7 @@ def order_book(symbol, exchanges, execution='async', stop=None, output=None, ver
         json_object = pd.DataFrame(r_data).to_json()
         
         # Writing to sample.json
-        with open("orderbooks.json", "w") as outfile:
+        with open("files/orderbooks_06jun2021.json", "w") as outfile:
             outfile.write(json_object)
 
     # Just return the DataFrame
@@ -255,7 +261,13 @@ def continuous_ob(orderbooks):
         With the 2 or more orderbooks now all of them with the same timestamps
 
     """
-
-    r_ts_orderbooks = 1
+    # orderbooks = ob_data.copy()
+    exchanges = list(orderbooks.keys())
     
-    return r_ts_orderbooks
+    timestamps = []
+    # Create a joined list of all the dates among all the exchanges
+    # [timestamps.append(orderbooks[exchanges[0]].keys()) for exchange in exchanges]
+
+    # If for an exchange the timestamp does not contain info, use the previous timestamp that does
+   
+    return 1
