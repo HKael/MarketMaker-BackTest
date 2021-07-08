@@ -2,7 +2,9 @@
 # -- --------------------------------------------------------------------------------------------------- -- #
 # -- MarketMaker-BackTest                                                                                -- #
 # -- --------------------------------------------------------------------------------------------------- -- #
-# -- Description: Code for a proof of concept of a market-maker backtest                                 -- #
+# -- file: data.py                                                                                       -- #
+# -- Description: Data sources and processing                                                            -- #
+# -- --------------------------------------------------------------------------------------------------- -- #
 # -- Author: IFFranciscoME - if.francisco.me@gmail.com                                                   -- #
 # -- license: MIT License                                                                                -- #
 # -- Repository: https://github.com/IFFranciscoME/MarketMaker-BackTest                                   -- #
@@ -228,7 +230,7 @@ def order_book(symbol, exchanges, execution='async', stop=None, output=None, ver
     else:
         raise ValueError(execution, 'is not supported as a type of execution')
 
-    # ----------------------------------------------------------------------------------- Type of output -- #
+    # ----------------------------------------------------------------------------------- TYPE OF OUTPUT -- #
 
     # A JSON file writen in directory
     if output == 'JSON':
