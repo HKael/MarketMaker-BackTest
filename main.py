@@ -2,7 +2,9 @@
 # -- --------------------------------------------------------------------------------------------------- -- #
 # -- MarketMaker-BackTest                                                                                -- #
 # -- --------------------------------------------------------------------------------------------------- -- #
-# -- Description: Code for a proof of concept of a market-maker backtest                                 -- #
+# -- file: main.py                                                                                       -- #
+# -- Description: Main execution logic for the project                                                   -- #
+# -- --------------------------------------------------------------------------------------------------- -- #
 # -- Author: IFFranciscoME - if.francisco.me@gmail.com                                                   -- #
 # -- license: MIT License                                                                                -- #
 # -- Repository: https://github.com/IFFranciscoME/MarketMaker-BackTest                                   -- #
@@ -12,7 +14,7 @@
 import pandas as pd
 import pandas as np
 
-# -- Load base packages
+# -- Load other scripts
 from data import fees_schedule, order_book
 
 # Small test
@@ -33,26 +35,23 @@ expected_volume = 0
 ob_data = pd.read_json('files/orderbooks_06jun2021.json', orient='values', typ='series')
 
 # -- Simulation of trades (Pending)
+
 """
 - Type A: Make a BID in Kraken, then Take BID in Bitfinex
-
-Initialize BTC and CASH balances
-
-Asyncronous function xemm_signal
 
 Check Signal_BID
     Difference between BIDs on Origin and Destination is greater than Maker_Margin_BID
     Make on Destination and Take on Origin
 
+kr_maker_bid * (1 + kr_maker_fee) = bf_taker_bid * (1 - bf_taker_fee)
+e.g. -> 5942.5638 * (1 + 0.0016) = 5964.00 * (1 - 0.0020) = 0
+
+- Type B: Take an ASK on Bitfinex, then Make an ASK in Kraken
+
 Check Signal_ASK
     Difference between ASKs on Origin and Destination is greater than Maker_Margin_ASK
     Take on Origin and Maker on Destination
 
-kr_maker_bid * (1 + kr_maker_fee) = bf_taker_bid * (1 - bf_taker_fee)
-5942.5638 * (1 + 0.0016) = 5964.00 * (1 - 0.0020) = 0
-
-- Type B: Take an ASK on Bitfinex, then Make an ASK in Kraken
-
-bf_taker_bid * (1 + bf_taker_fee) = kr_maker_ask * (1 - kr_maker_fee)
-6000 * (1 + 0.0020) - 6021.6346 * (1 - 0.0016) = 0
+bf_taker_ask * (1 + bf_taker_fee) = kr_maker_ask * (1 - kr_maker_fee)
+e.g. -> 6000 * (1 + 0.0020) - 6021.6346 * (1 - 0.0016) = 0
 """
