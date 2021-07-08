@@ -4,6 +4,17 @@ CHANGELOG
 =========
 
 ----------
+06.07.2021
+----------
+
+Added
+-----
+
+- ``data.py`` Spread is calculated within the `order_book` function.
+- ``data.py`` Added function `continuous_ob` to generate continuous orderbook compatible timestamps.
+- ``maker.py`` with `xemm_signal` as cross-exchange market maker signal generator for backtesting.
+
+----------
 05.07.2021
 ----------
 

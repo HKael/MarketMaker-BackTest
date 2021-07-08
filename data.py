@@ -26,7 +26,7 @@ import ccxt.async_support as ccxt_async
 
 def fees_schedule(exchange, symbol, expected_volume):
     """
-    To get the fee schedule of an already initialized client-exchange, including the case where there is 
+    To get the fee schedule of an already initialized client-exchange, including the case where there is
     a tierBased list provided by ccxt library.
 
     Parameters
@@ -47,7 +47,9 @@ def fees_schedule(exchange, symbol, expected_volume):
     References
     ----------
 
-        All the information currently available is obtained from ccxt already integrated API to differen exchanges, which according to [1] it support more than 120 bitcoin/altcoin exchanges. In order to validate fee schedule of initialized client-exchange, please refer to the documentation of that
+        All the information currently available is obtained from ccxt already integrated API to differen
+        exchanges, which according to [1] it support more than 120 bitcoin/altcoin exchanges. In order to
+        validate fee schedule of initialized client-exchange, please refer to the documentation of that
         particular exchange. The example include reference url for two exchanges: Bitfinex [2] and Kraken [3].
 
         [1] https://github.com/ccxt/ccxt
@@ -87,7 +89,9 @@ def fees_schedule(exchange, symbol, expected_volume):
 
 def order_book(symbol, exchanges, execution='async', stop=None, output=None, verbose=True):
     """
-    Asyncronous OrderBook data fetcher. It will asyncronously catch innovations of transactions whenever they occur for every exchange is included in the list exchanges, and return the complete orederbook in a in a JSON format or DataFrame format with 'ask', 'ask_size', 'bid', 'bid_size'.
+    Asyncronous OrderBook data fetcher. It will asyncronously catch innovations of transactions whenever they
+    occur for every exchange is included in the list exchanges, and return the complete orederbook in a in a
+    JSON format or DataFrame format with 'ask', 'ask_size', 'bid', 'bid_size'.
 
     Parameters
     ----------
@@ -248,7 +252,9 @@ def order_book(symbol, exchanges, execution='async', stop=None, output=None, ver
 
 def continuous_ob(orderbooks):
     """
-    Creates a continuous orderbook timeseries data, for all orderbooks included as input. i.e. all timestamps that one orderbook has and the other dont, in the latter repeates the information of the former, with this, the output will deliver two historical orderbooks with the same timestamp.
+    Creates a continuous orderbook timeseries data, for all orderbooks included as input. i.e. all timestamps
+    that one orderbook has and the other dont, in the latter repeates the information of the former, with
+    this, the output will deliver two historical orderbooks with the same timestamp.
 
     Parameters
     ----------
